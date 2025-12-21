@@ -1,0 +1,105 @@
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+
+    .header-title {
+        h1 {
+            margin: 0;
+            font-size: 2rem;
+            color: #1A237E;
+            font-weight: 700;
+        }
+
+        p {
+            margin: 4px 0 0;
+            color: #666;
+        }
+    }
+}
+
+.create-btn {
+    padding: 8px 24px !important;
+    border-radius: 50px !important;
+    height: 48px;
+    font-size: 1rem;
+}
+
+.quizzes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 24px;
+}
+
+.quiz-card {
+    border-radius: 16px !important;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: none !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
+    position: relative;
+
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1) !important;
+        cursor: pointer;
+    }
+
+    .card-status-strip {
+        height: 4px;
+        background: #00C853; // Published green
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+
+        &.draft {
+            background: #FF9800; // Orange for draft
+        }
+    }
+}
+
+.quiz-avatar {
+    background-color: #E3F2FD;
+    color: #1565C0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quiz-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.status-badge {
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    background-color: #E8F5E9;
+    color: #2E7D32;
+
+    &.draft {
+        background-color: #FFF3E0;
+        color: #EF6C00;
+    }
+}
+
+.date {
+    font-size: 0.85rem;
+    color: #888;
+}
+
+mat-card-actions {
+    padding: 8px 16px !important;
+    background-color: #fafafa;
+    border-top: 1px solid #f0f0f0;
+    display: flex;
+    gap: 8px;
+}

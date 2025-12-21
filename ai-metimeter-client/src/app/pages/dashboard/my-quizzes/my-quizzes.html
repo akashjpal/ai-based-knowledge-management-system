@@ -1,0 +1,47 @@
+<div class="page-header">
+    <div class="header-title">
+        <h1>My Assessments</h1>
+        <p>Manage and organize your AI-generated quizzes.</p>
+    </div>
+    <button mat-raised-button color="primary" class="create-btn">
+        <mat-icon>add</mat-icon>
+        New Assessment
+    </button>
+</div>
+
+<div class="quizzes-grid">
+    <mat-card class="quiz-card" *ngFor="let quiz of quizzes">
+        <div class="card-status-strip" [class.draft]="quiz.status === 'Draft'"></div>
+        <mat-card-header>
+            <div mat-card-avatar class="quiz-avatar">
+                <mat-icon>{{ quiz.subject === 'Biology' ? 'biotech' : (quiz.subject === 'History' ? 'history_edu' :
+                    'calculate') }}</mat-icon>
+            </div>
+            <mat-card-title>{{ quiz.title }}</mat-card-title>
+            <mat-card-subtitle>{{ quiz.subject }} • {{ quiz.questionsCount }} Questions</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+            <div class="quiz-meta">
+                <div class="status-badge" [class.draft]="quiz.status === 'Draft'">
+                    {{ quiz.status }}
+                </div>
+                <span class="date">Updated: {{ quiz.createdAt }}</span>
+            </div>
+        </mat-card-content>
+
+        <mat-card-actions align="end">
+            <button mat-icon-button color="primary" matTooltip="Edit">
+                <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="accent" matTooltip="Analyze">
+                <mat-icon>analytics</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" matTooltip="Delete">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </mat-card-actions>
+    </mat-card>
+
+    <!-- Empty State Placeholder if needed -->
+</div>
