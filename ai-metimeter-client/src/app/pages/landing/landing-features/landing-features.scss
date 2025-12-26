@@ -1,61 +1,56 @@
 .features-section {
     padding: 120px 24px;
-    background-color: #0f172a; // Match hero bg for seamless look
+    background: #09090b; // Match Hero
     position: relative;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
-
-    // Subtle texture or grid could go here
 }
 
 .features-header {
     text-align: center;
     margin-bottom: 5rem;
-    max-width: 700px;
+    max-width: 600px;
     margin-left: auto;
     margin-right: auto;
 
     h2 {
-        font-size: 3.5rem;
-        background: linear-gradient(to right, #fff, #94a3b8);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        margin-bottom: 1.5rem;
-        font-weight: 800;
+        font-family: 'Inter', sans-serif;
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 1rem;
         letter-spacing: -0.02em;
     }
 
     p {
-        font-size: 1.25rem;
-        color: #94a3b8;
-        line-height: 1.7;
+        font-size: 1.125rem;
+        color: #a1a1aa; // Zinc 400
+        line-height: 1.6;
     }
 }
 
 .features-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-    gap: 3rem;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
     max-width: 1200px;
     margin: 0 auto;
 }
 
 .feature-card {
-    background: rgba(30, 41, 59, 0.5) !important; // Slate 800 with opacity
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.05) !important;
-    border-radius: 24px !important;
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 16px !important;
     padding: 2.5rem !important;
+    transition: all 0.3s ease;
     height: 100%;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 
-    // Reset defaults
+    // Default Reset
     box-shadow: none !important;
 
     &:hover {
-        transform: translateY(-8px);
-        background: rgba(30, 41, 59, 0.8) !important;
-        border-color: rgba(99, 102, 241, 0.3) !important; // Indigo tint
-        box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.4) !important;
+        background: rgba(255, 255, 255, 0.05) !important;
+        border-color: rgba(255, 255, 255, 0.15) !important;
+        transform: translateY(-4px);
 
         .feature-icon {
             transform: scale(1.1);
@@ -64,148 +59,59 @@
 
     mat-card-header {
         margin-bottom: 1.5rem;
-
-        ::ng-deep .mat-mdc-card-header-text {
-            margin: 0;
-        }
+        padding: 0 !important;
     }
 
     mat-card-title {
-        font-size: 1.5rem !important;
-        font-weight: 700 !important;
-        color: #f8fafc;
+        color: white;
+        font-size: 1.25rem !important;
+        font-weight: 600 !important;
         margin-top: 1.5rem !important;
-        letter-spacing: -0.01em;
     }
 
-    mat-card-content p {
-        color: #94a3b8;
-        font-size: 1.125rem;
-        line-height: 1.6;
+    mat-card-content {
+        padding: 0 !important;
+
+        p {
+            color: #a1a1aa;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin: 0;
+        }
     }
 }
 
 .feature-icon {
-    width: 64px;
-    height: 64px;
-    border-radius: 20px;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: transform 0.4s ease;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    transition: transform 0.3s ease;
 
     mat-icon {
-        font-size: 32px;
-        width: 32px;
-        height: 32px;
-        color: white;
+        font-size: 24px;
+        width: 24px;
+        height: 24px;
     }
 
     &.upload-icon {
-        background: linear-gradient(135deg, #3b82f6, #2563eb); // Blue
-        box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.4);
+        color: #60a5fa;
     }
 
+    // Blue
     &.ai-icon {
-        background: linear-gradient(135deg, #8b5cf6, #7c3aed); // Violet
-        box-shadow: 0 10px 20px -5px rgba(124, 58, 237, 0.4);
+        color: #c084fc;
     }
 
+    // Purple
     &.live-icon {
-        background: linear-gradient(135deg, #10b981, #059669); // Emerald
-        box-shadow: 0 10px 20px -5px rgba(5, 150, 105, 0.4);
-    }
-}
-
-.features-header {
-    margin-bottom: 80px;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-
-    h2 {
-        font-size: 3rem;
-        color: #1A237E;
-        margin-bottom: 20px;
-        font-weight: 800;
-        letter-spacing: -0.5px;
+        color: #34d399;
     }
 
-    p {
-        font-size: 1.25rem;
-        color: #666;
-        line-height: 1.6;
-    }
-}
-
-.features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 40px;
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-.feature-card {
-    text-align: left;
-    padding: 40px;
-    border-radius: 24px !important;
-    background: white;
-    border: none !important;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05) !important;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    height: 100%;
-
-    &:hover {
-        transform: translateY(-12px);
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1) !important;
-    }
-
-    mat-card-header {
-        margin-bottom: 24px;
-
-        ::ng-deep .mat-mdc-card-header-text {
-            margin: 0;
-        }
-    }
-
-    mat-card-title {
-        font-size: 1.5rem !important;
-        font-weight: 700 !important;
-        color: #333;
-        margin-top: 24px !important;
-    }
-}
-
-.feature-icon {
-    width: 60px;
-    height: 60px;
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 16px;
-    font-size: 24px;
-    color: white;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-
-    &.upload-icon {
-        background: linear-gradient(135deg, #2196F3, #1976D2);
-    }
-
-    &.ai-icon {
-        background: linear-gradient(135deg, #9C27B0, #7B1FA2);
-    }
-
-    &.live-icon {
-        background: linear-gradient(135deg, #00C853, #00C853);
-    }
-}
-
-mat-card-content p {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: #555;
-    margin: 0;
+    // Emerald
 }
