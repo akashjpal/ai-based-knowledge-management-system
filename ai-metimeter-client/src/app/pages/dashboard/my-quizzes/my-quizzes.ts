@@ -4,6 +4,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatMenuModule } from '@angular/material/menu';
 import { RouterModule } from '@angular/router';
 
 interface Quiz {
@@ -25,6 +26,7 @@ interface Quiz {
         MatButtonModule,
         MatIconModule,
         MatChipsModule,
+        MatMenuModule,
         RouterModule
     ],
     templateUrl: './my-quizzes.html',
@@ -58,4 +60,17 @@ export class MyQuizzes {
             status: 'Published',
         }
     ];
+
+    selectedFilter: 'All' | 'Draft' | 'Published' = 'All';
+
+    get filteredQuizzes() {
+        if (this.selectedFilter === 'All') {
+            return this.quizzes;
+        }
+        return this.quizzes.filter(quiz => quiz.status === this.selectedFilter);
+    }
+
+    setFilter(filter: 'All' | 'Draft' | 'Published') {
+        this.selectedFilter = filter;
+    }
 }

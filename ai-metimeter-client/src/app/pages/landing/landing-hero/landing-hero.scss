@@ -2,30 +2,253 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 100px 60px;
-    background: linear-gradient(135deg, #1A237E 0%, #311B92 100%); // Deep Indigo to Deep Purple
-    min-height: 600px;
+    padding: 120px 80px;
+    background: #0f172a; // Slate 900
+    min-height: 80vh;
     color: white;
     position: relative;
     overflow: hidden;
 
+    // Animated background blobs
     &::before {
         content: '';
         position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 60%);
-        animation: rotate 60s linear infinite;
+        top: -10%;
+        right: -10%;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, rgba(124, 58, 237, 0.4) 0%, transparent 70%); // Violet glow
+        filter: blur(80px);
+        animation: float-slow 10s ease-in-out infinite alternate;
+        z-index: 0;
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: -10%;
+        left: -10%;
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, transparent 70%); // Blue glow
+        filter: blur(60px);
+        animation: float-slower 15s ease-in-out infinite alternate-reverse;
         z-index: 0;
     }
 
     @media (max-width: 960px) {
         flex-direction: column;
         text-align: center;
-        padding: 60px 20px;
+        padding: 80px 24px;
+        justify-content: center;
     }
+}
+
+@keyframes float-slow {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(-30px, 30px);
+    }
+}
+
+@keyframes float-slower {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(40px, -20px);
+    }
+}
+
+.hero-content {
+    flex: 1;
+    max-width: 600px;
+    z-index: 1;
+}
+
+.hero-title {
+    font-size: 4.5rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    background: linear-gradient(to right, #ffffff, #a5b4fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+    @media (max-width: 600px) {
+        font-size: 3rem;
+    }
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    color: #94a3b8; // Slate 400
+    margin-bottom: 3rem;
+    line-height: 1.6;
+    max-width: 540px;
+
+    @media (max-width: 960px) {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+.hero-actions {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+
+    @media (max-width: 960px) {
+        justify-content: center;
+    }
+}
+
+.cta-button {
+    padding: 0.75rem 2.5rem !important;
+    font-size: 1.125rem !important;
+    border-radius: 99px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.02em !important;
+    transition: all 0.3s ease !important;
+
+    &[color="primary"] {
+        background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%) !important; // Indigo gradient
+        box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.4) !important;
+        border: none !important;
+
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 30px -10px rgba(79, 70, 229, 0.5) !important;
+        }
+    }
+
+    &:not([color="primary"]) {
+        color: white !important;
+        border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(8px);
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.4) !important;
+        }
+    }
+}
+
+.hero-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    perspective: 1000px;
+
+    @media (max-width: 960px) {
+        margin-top: 4rem;
+        width: 100%;
+    }
+
+    .placeholder-graphic {
+        position: relative;
+        width: 100%;
+        max-width: 600px;
+        height: 400px;
+
+        .circle {
+            position: absolute;
+            top: 20%;
+            right: 10%;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f43f5e, #ec4899); // Rose to Pink
+            filter: blur(60px);
+            opacity: 0.6;
+            animation: pulse-glow 4s infinite alternate;
+        }
+
+        .card {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            height: 70%;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &::after {
+                content: 'AI Analysis in Progress...';
+                font-family: 'Courier New', monospace;
+                color: #e2e8f0;
+                font-size: 1.25rem;
+                letter-spacing: 0.05em;
+                animation: type 3s steps(30) infinite;
+                border-right: 2px solid #6366f1;
+                white-space: nowrap;
+                overflow: hidden;
+            }
+        }
+    }
+}
+
+@keyframes pulse-glow {
+    0% {
+        opacity: 0.4;
+        transform: scale(0.9);
+    }
+
+    100% {
+        opacity: 0.7;
+        transform: scale(1.1);
+    }
+}
+
+@keyframes type {
+
+    0%,
+    100% {
+        width: 0;
+    }
+
+    50%,
+    90% {
+        width: 22ch;
+    }
+}
+
+position: relative;
+overflow: hidden;
+
+&::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 60%);
+    animation: rotate 60s linear infinite;
+    z-index: 0;
+}
+
+@media (max-width: 960px) {
+    flex-direction: column;
+    text-align: center;
+    padding: 60px 20px;
+}
 }
 
 @keyframes rotate {

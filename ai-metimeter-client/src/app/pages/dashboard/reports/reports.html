@@ -1,0 +1,70 @@
+<div class="page-header">
+    <div class="header-title">
+        <h1>Analysis Reports</h1>
+        <p> detailed insights into your assessment performance.</p>
+    </div>
+    <button mat-stroked-button color="primary">
+        <mat-icon>download</mat-icon>
+        Export Data
+    </button>
+</div>
+
+<div class="stats-grid">
+    <mat-card class="stat-card">
+        <mat-card-content>
+            <div class="stat-icon primary">
+                <mat-icon>quiz</mat-icon>
+            </div>
+            <div class="stat-info">
+                <span class="label">Total Assessments</span>
+                <span class="value">24</span>
+            </div>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card">
+        <mat-card-content>
+            <div class="stat-icon accent">
+                <mat-icon>group</mat-icon>
+            </div>
+            <div class="stat-info">
+                <span class="label">Total Participants</span>
+                <span class="value">156</span>
+            </div>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card">
+        <mat-card-content>
+            <div class="stat-icon warn">
+                <mat-icon>trending_up</mat-icon>
+            </div>
+            <div class="stat-info">
+                <span class="label">Avg. Performance</span>
+                <span class="value">82%</span>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
+
+<div class="dashboard-content">
+    <mat-card class="activity-card">
+        <mat-card-header>
+            <mat-card-title>Recent Activity</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-list>
+                <mat-list-item *ngFor="let item of recentActivity">
+                    <mat-icon matListItemIcon>{{item.icon}}</mat-icon>
+                    <div matListItemTitle>{{item.title}}</div>
+                    <div matListItemLine>
+                        <span class="score-badge">{{item.score}}</span> • {{item.date}}
+                    </div>
+                    <a mat-stroked-button color="primary" [routerLink]="['/dashboard/reports', '123']" matListItemMeta>
+                        View Report
+                    </a>
+                </mat-list-item>
+            </mat-list>
+        </mat-card-content>
+    </mat-card>
+</div>

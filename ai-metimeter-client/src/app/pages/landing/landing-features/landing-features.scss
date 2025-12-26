@@ -1,7 +1,120 @@
 .features-section {
-    padding: 100px 40px;
-    background-color: #f8f9fa;
+    padding: 120px 24px;
+    background-color: #0f172a; // Match hero bg for seamless look
+    position: relative;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+
+    // Subtle texture or grid could go here
+}
+
+.features-header {
     text-align: center;
+    margin-bottom: 5rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+
+    h2 {
+        font-size: 3.5rem;
+        background: linear-gradient(to right, #fff, #94a3b8);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 1.5rem;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+    }
+
+    p {
+        font-size: 1.25rem;
+        color: #94a3b8;
+        line-height: 1.7;
+    }
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.feature-card {
+    background: rgba(30, 41, 59, 0.5) !important; // Slate 800 with opacity
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    border-radius: 24px !important;
+    padding: 2.5rem !important;
+    height: 100%;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+    // Reset defaults
+    box-shadow: none !important;
+
+    &:hover {
+        transform: translateY(-8px);
+        background: rgba(30, 41, 59, 0.8) !important;
+        border-color: rgba(99, 102, 241, 0.3) !important; // Indigo tint
+        box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.4) !important;
+
+        .feature-icon {
+            transform: scale(1.1);
+        }
+    }
+
+    mat-card-header {
+        margin-bottom: 1.5rem;
+
+        ::ng-deep .mat-mdc-card-header-text {
+            margin: 0;
+        }
+    }
+
+    mat-card-title {
+        font-size: 1.5rem !important;
+        font-weight: 700 !important;
+        color: #f8fafc;
+        margin-top: 1.5rem !important;
+        letter-spacing: -0.01em;
+    }
+
+    mat-card-content p {
+        color: #94a3b8;
+        font-size: 1.125rem;
+        line-height: 1.6;
+    }
+}
+
+.feature-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.4s ease;
+
+    mat-icon {
+        font-size: 32px;
+        width: 32px;
+        height: 32px;
+        color: white;
+    }
+
+    &.upload-icon {
+        background: linear-gradient(135deg, #3b82f6, #2563eb); // Blue
+        box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.4);
+    }
+
+    &.ai-icon {
+        background: linear-gradient(135deg, #8b5cf6, #7c3aed); // Violet
+        box-shadow: 0 10px 20px -5px rgba(124, 58, 237, 0.4);
+    }
+
+    &.live-icon {
+        background: linear-gradient(135deg, #10b981, #059669); // Emerald
+        box-shadow: 0 10px 20px -5px rgba(5, 150, 105, 0.4);
+    }
 }
 
 .features-header {

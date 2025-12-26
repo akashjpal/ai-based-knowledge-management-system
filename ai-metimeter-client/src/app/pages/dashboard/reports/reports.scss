@@ -1,0 +1,119 @@
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+
+    .header-title {
+        h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin: 0;
+            color: #1f2937;
+        }
+
+        p {
+            margin: 0.5rem 0 0;
+            color: #6b7280;
+        }
+    }
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+
+    .stat-card {
+        border-radius: 16px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        transition: transform 0.2s;
+
+        &:hover {
+            transform: translateY(-4px);
+        }
+
+        mat-card-content {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 1.5rem;
+        }
+
+        .stat-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            mat-icon {
+                font-size: 32px;
+                width: 32px;
+                height: 32px;
+            }
+
+            &.primary {
+                background: rgba(79, 70, 229, 0.1);
+                color: #4f46e5;
+            }
+
+            &.accent {
+                background: rgba(16, 185, 129, 0.1);
+                color: #10b981;
+            }
+
+            &.warn {
+                background: rgba(245, 158, 11, 0.1);
+                color: #f59e0b;
+            }
+        }
+
+        .stat-info {
+            display: flex;
+            flex-direction: column;
+
+            .label {
+                font-size: 0.875rem;
+                color: #6b7280;
+                font-weight: 500;
+            }
+
+            .value {
+                font-size: 1.5rem;
+                font-weight: 700;
+                color: #111827;
+            }
+        }
+    }
+}
+
+.dashboard-content {
+    .activity-card {
+        border-radius: 16px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+
+        .score-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background: #eff6ff;
+            color: #2563eb;
+        }
+
+        mat-list-item {
+            height: auto !important;
+            padding-top: 12px !important;
+            padding-bottom: 12px !important;
+
+            .mat-mdc-list-item-meta {
+                align-self: center;
+            }
+        }
+    }
+}
