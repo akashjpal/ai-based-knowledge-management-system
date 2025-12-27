@@ -1,6 +1,13 @@
 .features-section {
     padding: 120px 24px;
-    background: #09090b; // Match Hero
+    background-color: #09090b;
+    // Continue Grid Pattern
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-position: center center; // Align might be tricky but better than blank
+
     position: relative;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
@@ -46,11 +53,24 @@
 
     // Default Reset
     box-shadow: none !important;
+    position: relative; // For pseudo-element glow
+
+    &::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: 16px;
+        padding: 1px;
+        background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.1), transparent);
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask-composite: exclude;
+        pointer-events: none;
+    }
 
     &:hover {
         background: rgba(255, 255, 255, 0.05) !important;
-        border-color: rgba(255, 255, 255, 0.15) !important;
         transform: translateY(-4px);
+        box-shadow: 0 0 30px rgba(139, 92, 246, 0.15) !important; // Violet glow
 
         .feature-icon {
             transform: scale(1.1);

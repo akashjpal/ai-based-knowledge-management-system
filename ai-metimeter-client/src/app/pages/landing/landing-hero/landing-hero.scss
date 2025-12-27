@@ -10,7 +10,14 @@
     align-items: center;
     justify-content: center;
     padding: 160px 24px;
-    background: #09090b; // Zinc 950 - Deepest Dark
+    background-color: #09090b; // Zinc 950
+    // Tech Grid Pattern
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-position: center top;
+
     min-height: 100vh;
     color: white;
     position: relative;
@@ -20,12 +27,13 @@
     &::before {
         content: '';
         position: absolute;
-        top: -20%;
+        top: -10%;
         left: -10%;
-        width: 800px;
-        height: 800px;
-        background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 60%); // Violet
-        filter: blur(100px);
+        width: 1000px;
+        height: 1000px;
+        // Boosted opacity (0.15 -> 0.3)
+        background: radial-gradient(circle, rgba(139, 92, 246, 0.3) 0%, transparent 70%); // Violet
+        filter: blur(80px);
         animation: aurora-float 20s infinite alternate;
         z-index: 0;
     }
@@ -33,12 +41,13 @@
     &::after {
         content: '';
         position: absolute;
-        bottom: -20%;
+        bottom: -10%;
         right: -10%;
-        width: 1000px;
-        height: 1000px;
-        background: radial-gradient(circle, rgba(56, 189, 248, 0.1) 0%, transparent 60%); // Sky Blue
-        filter: blur(120px);
+        width: 1200px;
+        height: 1200px;
+        // Boosted opacity (0.1 -> 0.25)
+        background: radial-gradient(circle, rgba(56, 189, 248, 0.25) 0%, transparent 70%); // Sky Blue
+        filter: blur(100px);
         animation: aurora-float-reverse 25s infinite alternate;
         z-index: 0;
     }
@@ -117,10 +126,15 @@
     display: flex;
     gap: 1rem;
     margin-bottom: 5rem;
+    justify-content: center; // Fix button alignment
+    width: 100%; // Ensure container allows centering
 }
 
 .cta-button {
     height: 48px;
+    display: inline-flex !important; // Use flex for centering
+    align-items: center !important;
+    justify-content: center !important;
     padding: 0 32px !important;
     border-radius: 8px !important;
     font-weight: 500 !important;
@@ -161,35 +175,141 @@
     .visual-container {
         position: relative;
         border-radius: 16px;
-        background: rgba(24, 24, 27, 0.6); // Zinc 900
+        background: rgba(24, 24, 27, 0.8); // Zinc 900
         border: 1px solid rgba(255, 255, 255, 0.1);
         backdrop-filter: blur(20px);
         box-shadow:
             0 25px 50px -12px rgba(0, 0, 0, 0.5),
-            0 0 0 1px rgba(255, 255, 255, 0.05); // Inner stroke
+            0 0 0 1px rgba(255, 255, 255, 0.05);
         overflow: hidden;
-        transform: rotateX(10deg);
+        transform: rotateX(12deg) rotateY(-4deg); // Slight 3D Tilt
         transform-style: preserve-3d;
         animation: hero-reveal 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
         opacity: 0;
+        min-height: 500px; // Ensure height
+    }
+}
 
-        &::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
-        }
+.mock-dashboard {
+    display: flex;
+    height: 100%;
+    padding: 24px;
+    gap: 24px;
+}
 
-        img {
-            width: 100%;
-            height: auto;
-            display: block;
-            opacity: 0.8; // Blend better
-            mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+.mock-sidebar {
+    width: 60px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    .mock-sidebar-item {
+        width: 100%;
+        aspect-ratio: 1;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.05);
+
+        &.active {
+            background: rgba(139, 92, 246, 0.5); // Violet
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.3);
         }
+    }
+}
+
+.mock-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.mock-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .mock-title {
+        width: 150px;
+        height: 24px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 6px;
+    }
+
+    .mock-profile {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+    }
+}
+
+.mock-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 200px 200px;
+    gap: 24px;
+
+    .mock-card {
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        position: relative;
+        overflow: hidden;
+
+        &.large {
+            grid-row: span 2;
+            padding: 24px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 10px;
+        }
+    }
+}
+
+.mock-chart-line {
+    width: 100%;
+    height: 60%;
+    background: linear-gradient(to top, rgba(139, 92, 246, 0.2), transparent);
+    border-top: 2px solid #8b5cf6;
+    border-radius: 4px;
+    animation: mock-pulse 3s infinite ease-in-out;
+
+    &.delay-1 {
+        height: 40%;
+        border-color: #38bdf8;
+        background: linear-gradient(to top, rgba(56, 189, 248, 0.2), transparent);
+        animation-delay: 0.5s;
+    }
+}
+
+.mock-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    .mock-list-item {
+        height: 40px;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 8px;
+    }
+}
+
+@keyframes mock-pulse {
+
+    0%,
+    100% {
+        opacity: 0.5;
+        height: 60%;
+    }
+
+    50% {
+        opacity: 0.8;
+        height: 65%;
     }
 }
 

@@ -5,6 +5,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute, RouterModule } from '@angular/router';
+import { jsPDF } from 'jspdf';
+import autoTable from 'jspdf-autotable';
 
 @Component({
     selector: 'app-assessment-report',
@@ -48,8 +50,66 @@ export class AssessmentReport {
         // In a real app, use this ID to fetch data
     }
 
+    exportCSV() {
+        const headers = ['Student Name', 'Score', 'Time Taken', 'Status'];
+        const rows = this.studentResults.map(student => [
+            student.student,
+            `${student.score}%`,
+            student.time,
+            student.status
+        ]);
+
+        const csvContent = [
+            headers.join(','),
+            ...rows.map(row => row.join(','))
+        ].join('\n');
+
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement('a');
+        if (link.download !== undefined) {
+            const url = URL.createObjectURL(blob);
+            link.setAttribute('href', url);
+            link.setAttribute('download', `assessment_report_${this.assessmentId || 'results'}.csv`);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    }
+
     downloadPDF() {
-        console.log('Downloading PDF for assessment:', this.assessmentId);
-        // Implement PDF generation logic here
+        const doc = new jsPDF();
+
+        // Header
+        doc.setFontSize(20);
+        doc.text(this.assessmentDetails.title, 14, 22);
+
+        doc.setFontSize(11);
+        doc.setTextColor(100);
+        doc.text(`${this.assessmentDetails.subject} • ${this.assessmentDetails.date}`, 14, 30);
+
+        // Stats Summary
+        doc.setFontSize(12);
+        doc.setTextColor(0);
+        doc.text(`Participants: ${this.assessmentDetails.participants}`, 14, 45);
+        doc.text(`Average Score: ${this.assessmentDetails.avgScore}%`, 14, 52);
+
+        // Table
+        const tableBody = this.studentResults.map(student => [
+            student.student,
+            `${student.score}%`,
+            student.time,
+            student.status
+        ]);
+
+        autoTable(doc, {
+            head: [['Student Name', 'Score', 'Time Taken', 'Status']],
+            body: tableBody,
+            startY: 60,
+            theme: 'grid',
+            headStyles: { fillColor: [139, 92, 246] } // Violet Theme
+        });
+
+        doc.save(`assessment_report_${this.assessmentId || 'results'}.pdf`);
     }
 }
