@@ -10,5 +10,9 @@ export const routes: Routes = [
         path: 'student',
         loadChildren: () => import('./pages/student/student.routes').then(m => m.STUDENT_ROUTES)
     },
+    {
+        path: 'auth',
+        loadChildren: () => import('./pages/auth/auth.routes').then(m => m.AUTH_ROUTES)
+    },
     { path: '**', redirectTo: '' }
 ];
