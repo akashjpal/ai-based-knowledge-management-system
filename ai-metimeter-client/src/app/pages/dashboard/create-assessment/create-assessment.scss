@@ -1,0 +1,231 @@
+.page-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding-bottom: 4rem;
+
+    .page-header {
+        text-align: center;
+        margin-bottom: 2rem;
+
+        h1 {
+            font-size: 2rem;
+            color: #1f2937;
+            margin: 0;
+        }
+
+        p {
+            color: #6b7280;
+        }
+    }
+}
+
+.custom-stepper {
+    background: transparent;
+}
+
+.step-content {
+    padding-top: 2rem;
+}
+
+.form-card {
+    border-radius: 16px;
+    padding: 1rem;
+
+    .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+        margin-top: 1rem;
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .file-upload-section {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+
+            .label {
+                font-size: 0.875rem;
+                font-weight: 500;
+                color: #374151;
+            }
+
+            .upload-box {
+                border: 2px dashed #cbd5e1;
+                border-radius: 8px;
+                padding: 1.5rem;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                transition: all 0.2s;
+                background: #f8fafc;
+
+                &:hover {
+                    border-color: #3b82f6;
+                    background: #eff6ff;
+
+                    mat-icon {
+                        color: #3b82f6;
+                    }
+                }
+
+                mat-icon {
+                    font-size: 2rem;
+                    width: 2rem;
+                    height: 2rem;
+                    color: #94a3b8;
+                    margin-bottom: 0.5rem;
+                }
+
+                .text {
+                    font-weight: 500;
+                    color: #334155;
+                }
+
+                .sub-text {
+                    font-size: 0.75rem;
+                    color: #64748b;
+                }
+            }
+
+            .file-preview {
+                display: flex;
+                align-items: center;
+                padding: 0.75rem;
+                background: #fff;
+                border: 1px solid #e2e8f0;
+                border-radius: 8px;
+                gap: 1rem;
+
+                .pdf-icon {
+                    color: #ef4444;
+                }
+
+                .file-info {
+                    flex: 1;
+                    display: flex;
+                    flex-direction: column;
+
+                    .name {
+                        font-weight: 500;
+                        font-size: 0.9rem;
+                    }
+
+                    .size {
+                        font-size: 0.75rem;
+                        color: #64748b;
+                    }
+                }
+            }
+
+            .file-error {
+                font-size: 0.75rem;
+                color: #ef4444;
+            }
+        }
+
+        @media (max-width: 600px) {
+            grid-template-columns: 1fr;
+        }
+    }
+}
+
+.questions-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+
+    mat-expansion-panel {
+        border-radius: 8px;
+        margin-bottom: 0.5rem;
+
+        .question-editor {
+            margin-top: 1rem;
+
+            .full-width {
+                width: 100%;
+            }
+
+            .options-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+
+                .option-row {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+
+                    mat-radio-button {
+                        margin-top: -16px; // align with input
+                    }
+
+                    .option-input {
+                        width: 100%;
+                    }
+                }
+            }
+
+            .action-row {
+                display: flex;
+                justify-content: flex-end;
+                margin-top: 1rem;
+            }
+        }
+    }
+
+    .add-btn {
+        align-self: flex-start;
+        margin-top: 1rem;
+    }
+}
+
+.step-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.preview-card {
+    border-radius: 16px;
+
+    .preview-questions {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+
+        .preview-item {
+            .q-text {
+                font-size: 1.1rem;
+                margin: 0 0 0.5rem;
+            }
+
+            .q-options {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+
+                .option {
+                    background: #f3f4f6;
+                    padding: 0.5rem 1rem;
+                    border-radius: 6px;
+                    font-size: 0.9rem;
+
+                    &.correct {
+                        background: #d1fae5;
+                        color: #065f46;
+                        font-weight: 500;
+                        border: 1px solid #34d399;
+                    }
+                }
+            }
+        }
+    }
+}

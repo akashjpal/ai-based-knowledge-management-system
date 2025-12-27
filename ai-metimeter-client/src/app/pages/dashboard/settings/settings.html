@@ -1,0 +1,75 @@
+<div class="page-container">
+    <div class="page-header">
+        <h1>Settings</h1>
+        <p>Manage your account preferences and application settings.</p>
+    </div>
+
+    <mat-tab-group animationDuration="0ms" class="settings-tabs">
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon class="tab-icon">person</mat-icon>
+                Profile
+            </ng-template>
+            <div class="tab-content">
+                <mat-card class="settings-card">
+                    <mat-card-header>
+                        <mat-card-title>Personal Information</mat-card-title>
+                        <mat-card-subtitle>Update your personal details here.</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div class="form-grid">
+                            <mat-form-field appearance="outline">
+                                <mat-label>First Name</mat-label>
+                                <input matInput value="Demo">
+                            </mat-form-field>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Last Name</mat-label>
+                                <input matInput value="User">
+                            </mat-form-field>
+                            <mat-form-field appearance="outline" class="full-width">
+                                <mat-label>Email Address</mat-label>
+                                <input matInput value="demo@example.com" type="email">
+                            </mat-form-field>
+                        </div>
+                    </mat-card-content>
+                    <mat-card-actions align="end">
+                        <button mat-button>Cancel</button>
+                        <button mat-raised-button color="primary">Save Changes</button>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+        </mat-tab>
+
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon class="tab-icon">tune</mat-icon>
+                Preferences
+            </ng-template>
+            <div class="tab-content">
+                <mat-card class="settings-card">
+                    <mat-card-header>
+                        <mat-card-title>App Preferences</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div class="toggles-list">
+                            <div class="toggle-item">
+                                <div class="toggle-label">
+                                    <span class="title">Email Notifications</span>
+                                    <span class="desc">Receive emails about new features and updates</span>
+                                </div>
+                                <mat-slide-toggle color="primary" [checked]="true"></mat-slide-toggle>
+                            </div>
+                            <div class="toggle-item">
+                                <div class="toggle-label">
+                                    <span class="title">Dark Mode</span>
+                                    <span class="desc">Switch between light and dark themes</span>
+                                </div>
+                                <mat-slide-toggle color="primary"></mat-slide-toggle>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+</div>

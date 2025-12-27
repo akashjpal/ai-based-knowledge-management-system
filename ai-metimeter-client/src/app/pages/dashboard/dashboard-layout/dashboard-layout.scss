@@ -41,8 +41,9 @@
 
 .content-wrapper {
     padding: 32px;
-    height: calc(100vh - 64px); // Adjust based on toolbar height
-    overflow-y: auto;
+    // height and overflow removed to prevent double scroll
+    // height: calc(100vh - 64px); 
+    // overflow-y: auto;
     background-color: #f8f9fa;
     box-sizing: border-box;
 

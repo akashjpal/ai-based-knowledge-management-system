@@ -1,47 +1,95 @@
-<div class="page-header">
-    <div class="header-title">
-        <h1>My Assessments</h1>
-        <p>Manage and organize your AI-generated quizzes.</p>
-    </div>
-    <button mat-raised-button color="primary" class="create-btn">
-        <mat-icon>add</mat-icon>
-        New Assessment
-    </button>
-</div>
+<div class="dashboard-container">
+    <div class="hero-header">
+        <div class="hero-content">
+            <h1>My Knowledge Base</h1>
+            <p>Manage, analyze, and track your AI-generated assessments.</p>
 
-<div class="quizzes-grid">
-    <mat-card class="quiz-card" *ngFor="let quiz of quizzes">
-        <div class="card-status-strip" [class.draft]="quiz.status === 'Draft'"></div>
-        <mat-card-header>
-            <div mat-card-avatar class="quiz-avatar">
-                <mat-icon>{{ quiz.subject === 'Biology' ? 'biotech' : (quiz.subject === 'History' ? 'history_edu' :
-                    'calculate') }}</mat-icon>
-            </div>
-            <mat-card-title>{{ quiz.title }}</mat-card-title>
-            <mat-card-subtitle>{{ quiz.subject }} • {{ quiz.questionsCount }} Questions</mat-card-subtitle>
-        </mat-card-header>
-
-        <mat-card-content>
-            <div class="quiz-meta">
-                <div class="status-badge" [class.draft]="quiz.status === 'Draft'">
-                    {{ quiz.status }}
+            <div class="actions-bar">
+                <div class="search-wrapper">
+                    <mat-icon>search</mat-icon>
+                    <input type="text" placeholder="Search quizzes...">
                 </div>
-                <span class="date">Updated: {{ quiz.createdAt }}</span>
+                <button mat-raised-button color="primary" class="create-btn" routerLink="/dashboard/create-assessment">
+                    <mat-icon>add</mat-icon>
+                    New Assessment
+                </button>
             </div>
-        </mat-card-content>
+        </div>
+        <div class="hero-background"></div>
+    </div>
 
-        <mat-card-actions align="end">
-            <button mat-icon-button color="primary" matTooltip="Edit">
-                <mat-icon>edit</mat-icon>
-            </button>
-            <button mat-icon-button color="accent" matTooltip="Analyze">
-                <mat-icon>analytics</mat-icon>
-            </button>
-            <button mat-icon-button color="warn" matTooltip="Delete">
-                <mat-icon>delete</mat-icon>
-            </button>
-        </mat-card-actions>
-    </mat-card>
+    <div class="content-section">
+        <div class="section-header">
+            <h2>All Quizzes</h2>
+            <div class="filters">
+                <button mat-button [class.active]="selectedFilter === 'All'" (click)="setFilter('All')">All</button>
+                <button mat-button [class.active]="selectedFilter === 'Draft'"
+                    (click)="setFilter('Draft')">Drafts</button>
+                <button mat-button [class.active]="selectedFilter === 'Published'"
+                    (click)="setFilter('Published')">Published</button>
+            </div>
+        </div>
 
-    <!-- Empty State Placeholder if needed -->
+        <div class="quizzes-grid">
+            <mat-card class="quiz-card" *ngFor="let quiz of filteredQuizzes">
+                <div class="card-status-strip" [class.draft]="quiz.status === 'Draft'"></div>
+                <div class="card-menu">
+                    <button mat-icon-button [matMenuTriggerFor]="menu">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item>
+                            <mat-icon>edit</mat-icon>
+                            <span>Edit</span>
+                        </button>
+                        <button mat-menu-item>
+                            <mat-icon>analytics</mat-icon>
+                            <span>Analytics</span>
+                        </button>
+                        <button mat-menu-item class="delete-item">
+                            <mat-icon color="warn">delete</mat-icon>
+                            <span>Delete</span>
+                        </button>
+                    </mat-menu>
+                </div>
+
+                <mat-card-header>
+                    <div mat-card-avatar class="quiz-avatar" [ngClass]="quiz.subject.toLowerCase()">
+                        <mat-icon>{{ quiz.subject === 'Biology' ? 'biotech' : (quiz.subject === 'History' ?
+                            'history_edu' : 'calculate') }}</mat-icon>
+                    </div>
+                    <mat-card-title>{{ quiz.title }}</mat-card-title>
+                    <mat-card-subtitle>{{ quiz.subject }}</mat-card-subtitle>
+                </mat-card-header>
+
+                <mat-card-content>
+                    <div class="stats-row">
+                        <div class="stat">
+                            <span class="value">{{ quiz.questionsCount }}</span>
+                            <span class="label">Questions</span>
+                        </div>
+                        <div class="stat">
+                            <span class="value">15m</span>
+                            <span class="label">Duration</span>
+                        </div>
+                        <div class="stat">
+                            <span class="value">{{ quiz.status === 'Draft' ? '-' : '24' }}</span>
+                            <span class="label">Attempts</span>
+                        </div>
+                    </div>
+
+                    <div class="meta-footer">
+                        <span class="status-badge" [class.draft]="quiz.status === 'Draft'">
+                            {{ quiz.status }}
+                        </span>
+                        <span class="date">{{ quiz.createdAt }}</span>
+                    </div>
+                </mat-card-content>
+
+                <mat-card-actions>
+                    <button mat-stroked-button color="primary" class="action-btn">View Details</button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
 </div>

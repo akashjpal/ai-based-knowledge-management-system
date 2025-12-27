@@ -1,0 +1,108 @@
+<div class="page-container">
+    <div class="header-actions">
+        <button mat-button routerLink="/dashboard/reports">
+            <mat-icon>arrow_back</mat-icon> Back to Reports
+        </button>
+    </div>
+
+    <div class="report-header">
+        <div class="title-section">
+            <h1>{{assessmentDetails.title}}</h1>
+            <p>{{assessmentDetails.subject}} • {{assessmentDetails.date}}</p>
+        </div>
+        <div class="actions">
+            <button mat-stroked-button (click)="downloadPDF()">
+                <mat-icon>picture_as_pdf</mat-icon> Download PDF
+            </button>
+            <button mat-stroked-button color="primary" (click)="exportCSV()">
+                <mat-icon>download</mat-icon> Export CSV
+            </button>
+        </div>
+    </div>
+
+    <div class="stats-grid">
+        <mat-card class="stat-card blue">
+            <mat-card-content>
+                <div class="stat-value">{{assessmentDetails.avgScore}}%</div>
+                <div class="stat-label">Average Score</div>
+                <mat-icon class="bg-icon">show_chart</mat-icon>
+            </mat-card-content>
+        </mat-card>
+
+        <mat-card class="stat-card green">
+            <mat-card-content>
+                <div class="stat-value">{{assessmentDetails.participants}}</div>
+                <div class="stat-label">Participants</div>
+                <mat-icon class="bg-icon">people</mat-icon>
+            </mat-card-content>
+        </mat-card>
+
+        <mat-card class="stat-card purple">
+            <mat-card-content>
+                <div class="stat-value">{{assessmentDetails.highestScore}}%</div>
+                <div class="stat-label">Highest Score</div>
+                <mat-icon class="bg-icon">emoji_events</mat-icon>
+            </mat-card-content>
+        </mat-card>
+
+        <mat-card class="stat-card orange">
+            <mat-card-content>
+                <div class="stat-value">{{assessmentDetails.lowestScore}}%</div>
+                <div class="stat-label">Lowest Score</div>
+                <mat-icon class="bg-icon">warning</mat-icon>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+    <div class="content-wrapper">
+        <mat-card class="table-card">
+            <mat-card-header>
+                <mat-card-title>Participant Results</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <table mat-table [dataSource]="studentResults" class="results-table">
+                    <!-- Student Column -->
+                    <ng-container matColumnDef="student">
+                        <th mat-header-cell *matHeaderCellDef> Student Name </th>
+                        <td mat-cell *matCellDef="let element">
+                            <div class="student-cell">
+                                <div class="avatar">{{element.student[0]}}</div>
+                                <span>{{element.student}}</span>
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <!-- Score Column -->
+                    <ng-container matColumnDef="score">
+                        <th mat-header-cell *matHeaderCellDef> Score </th>
+                        <td mat-cell *matCellDef="let element" class="score-cell">
+                            <span [class.pass]="element.score >= 70" [class.fail]="element.score < 70">
+                                {{element.score}}%
+                            </span>
+                        </td>
+                    </ng-container>
+
+                    <!-- Time Column -->
+                    <ng-container matColumnDef="time">
+                        <th mat-header-cell *matHeaderCellDef> Time Taken </th>
+                        <td mat-cell *matCellDef="let element"> {{element.time}} </td>
+                    </ng-container>
+
+                    <!-- Status Column -->
+                    <ng-container matColumnDef="status">
+                        <th mat-header-cell *matHeaderCellDef> Status </th>
+                        <td mat-cell *matCellDef="let element">
+                            <span class="status-badge" [class.passed]="element.status === 'Passed'"
+                                [class.failed]="element.status === 'Failed'">
+                                {{element.status}}
+                            </span>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
