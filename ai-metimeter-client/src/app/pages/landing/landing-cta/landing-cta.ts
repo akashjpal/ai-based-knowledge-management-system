@@ -5,12 +5,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-landing-hero',
-  standalone: true,
-  imports: [CommonModule, MatButtonModule, RouterLink, MatIconModule],
-  templateUrl: './landing-hero.html',
-  styleUrl: './landing-hero.scss',
+    selector: 'app-landing-cta',
+    standalone: true,
+    imports: [CommonModule, MatButtonModule, MatIconModule, RouterLink],
+    templateUrl: './landing-cta.html',
+    styleUrl: './landing-cta.scss'
 })
-export class LandingHero {
+export class LandingCta {
 
 }
