@@ -1,53 +1,31 @@
-<section class="features-section">
-    <div class="features-header">
-        <h2>Why Choose AI Quick Analysis?</h2>
-        <p>Transform your documents into interactive assessments in seconds.</p>
-    </div>
+<section class="features-section" id="features">
+    <div class="features-container">
+        <!-- Header -->
+        <div class="features-header">
+            <span class="section-badge">
+                <mat-icon>auto_awesome</mat-icon>
+                Features
+            </span>
+            <h2 class="section-title">Everything You Need to Create Amazing Assessments</h2>
+            <p class="section-subtitle">
+                Powerful features designed to save you time and engage your students like never before.
+            </p>
+        </div>
 
-    <div class="features-grid">
-        <mat-card class="feature-card">
-            <mat-card-header>
-                <div mat-card-avatar class="feature-icon upload-icon">
-                    <mat-icon>cloud_upload</mat-icon>
-                </div>
-                <mat-card-title>Upload Anything</mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-                <p>
-                    Support for PDFs, images, and documents up to 5MB.
-                    Simply drag and drop your study materials to get started.
-                </p>
-            </mat-card-content>
-        </mat-card>
+        <!-- Bento Grid -->
+        <div class="bento-grid">
+            <div class="feature-card" *ngFor="let feature of features; let i = index"
+                [class.large]="feature.size === 'large'" [style.--accent-color]="feature.color">
 
-        <mat-card class="feature-card">
-            <mat-card-header>
-                <div mat-card-avatar class="feature-icon ai-icon">
-                    <mat-icon>psychology_alt</mat-icon>
+                <div class="feature-icon">
+                    <mat-icon>{{ feature.icon }}</mat-icon>
                 </div>
-                <mat-card-title>AI Generation</mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-                <p>
-                    Our advanced AI analyzes content to automatically generate relevant quizzes.
-                    Review and edit questions effortlessly.
-                </p>
-            </mat-card-content>
-        </mat-card>
 
-        <mat-card class="feature-card">
-            <mat-card-header>
-                <div mat-card-avatar class="feature-icon live-icon">
-                    <mat-icon>insights</mat-icon>
-                </div>
-                <mat-card-title>Live Engagement</mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-                <p>
-                    Monitor student progress in real-time.
-                    Visualize results instantly and adapt your teaching on the fly.
-                </p>
-            </mat-card-content>
-        </mat-card>
+                <h3 class="feature-title">{{ feature.title }}</h3>
+                <p class="feature-description">{{ feature.description }}</p>
+
+                <div class="feature-glow"></div>
+            </div>
+        </div>
     </div>
 </section>
