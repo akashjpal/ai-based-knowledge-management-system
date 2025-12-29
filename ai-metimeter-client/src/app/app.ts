@@ -29,7 +29,7 @@ export class App {
   }
 
   private checkRoute(url: string) {
-    // Hide header/footer on landing page (root path)
-    this.isLandingPage.set(url === '/' || url === '');
+    // Hide header/footer on landing page (root path) and dashboard pages (which have their own nav)
+    this.isLandingPage.set(url === '/' || url === '' || url.startsWith('/dashboard'));
   }
 }
