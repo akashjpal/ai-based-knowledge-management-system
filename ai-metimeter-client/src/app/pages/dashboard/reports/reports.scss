@@ -29,14 +29,16 @@
         font-family: 'Outfit', sans-serif;
         font-size: 2rem;
         font-weight: 700;
-        color: white;
+        color: var(--text-primary);
         margin: 0 0 0.5rem;
+        transition: color 0.3s ease;
     }
 
     p {
         font-size: 1rem;
-        color: #a1a1aa;
+        color: var(--text-secondary);
         margin: 0;
+        transition: color 0.3s ease;
     }
 }
 
@@ -45,10 +47,10 @@
     align-items: center;
     gap: 0.5rem;
     padding: 0.75rem 1.25rem;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--bg-card-hover);
+    border: 1px solid var(--border-subtle);
     border-radius: 12px;
-    color: white;
+    color: var(--text-primary);
     font-size: 0.875rem;
     font-weight: 500;
     cursor: pointer;
@@ -61,7 +63,7 @@
     }
 
     &:hover {
-        background: rgba(255, 255, 255, 0.1);
+        background: var(--bg-card);
         border-color: rgba(139, 92, 246, 0.3);
     }
 }
@@ -87,13 +89,14 @@
     align-items: center;
     gap: 1rem;
     padding: 1.5rem;
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: var(--card-bg, rgba(255, 255, 255, 0.02));
+    border: 1px solid var(--border-subtle);
     border-radius: 16px;
     transition: all 0.2s ease;
+    box-shadow: var(--card-shadow, none);
 
     &:hover {
-        background: rgba(255, 255, 255, 0.04);
+        background: var(--bg-card-hover);
         transform: translateY(-2px);
     }
 }
@@ -155,21 +158,25 @@
     font-family: 'Outfit', sans-serif;
     font-size: 1.75rem;
     font-weight: 700;
-    color: white;
+    color: var(--text-primary);
+    transition: color 0.3s ease;
 }
 
 .stat-label {
     font-size: 0.8125rem;
-    color: #71717a;
+    color: var(--text-secondary);
     margin-top: 0.125rem;
+    transition: color 0.3s ease;
 }
 
 // Reports Section
 .reports-section {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: var(--card-bg, rgba(255, 255, 255, 0.02));
+    border: 1px solid var(--border-subtle);
     border-radius: 20px;
     padding: 1.5rem;
+    transition: all 0.3s ease;
+    box-shadow: var(--card-shadow, none);
 }
 
 .section-header {
@@ -188,8 +195,9 @@
         font-family: 'Outfit', sans-serif;
         font-size: 1.25rem;
         font-weight: 600;
-        color: white;
+        color: var(--text-primary);
         margin: 0;
+        transition: color 0.3s ease;
     }
 }
 
@@ -201,23 +209,23 @@
 .filter-btn {
     padding: 0.5rem 1rem;
     background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--border-subtle);
     border-radius: 8px;
-    color: #71717a;
+    color: var(--text-secondary);
     font-size: 0.8125rem;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.2s ease;
 
     &:hover {
-        color: white;
-        background: rgba(255, 255, 255, 0.05);
+        color: var(--text-primary);
+        background: var(--bg-card-hover);
     }
 
     &.active {
         background: rgba(139, 92, 246, 0.15);
         border-color: rgba(139, 92, 246, 0.3);
-        color: white;
+        color: var(--text-primary);
     }
 }
 
@@ -233,13 +241,13 @@
     align-items: center;
     gap: 1rem;
     padding: 1rem 1.25rem;
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.04);
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
     border-radius: 14px;
     transition: all 0.2s ease;
 
     &:hover {
-        background: rgba(255, 255, 255, 0.04);
+        background: var(--bg-card-hover);
         border-color: rgba(139, 92, 246, 0.2);
     }
 
@@ -327,17 +335,19 @@
         font-family: 'Outfit', sans-serif;
         font-size: 1rem;
         font-weight: 600;
-        color: white;
+        color: var(--text-primary);
         margin: 0;
+        transition: color 0.3s ease;
     }
 }
 
 .report-subject {
     font-size: 0.75rem;
     padding: 0.125rem 0.5rem;
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--bg-card-hover);
     border-radius: 4px;
-    color: #a1a1aa;
+    color: var(--text-secondary);
+    transition: all 0.3s ease;
 }
 
 .report-meta {
@@ -350,7 +360,8 @@
     align-items: center;
     gap: 0.25rem;
     font-size: 0.8125rem;
-    color: #71717a;
+    color: var(--text-secondary);
+    transition: color 0.3s ease;
 
     mat-icon {
         font-size: 14px;
@@ -470,11 +481,13 @@
     font-family: 'Outfit', sans-serif;
     font-size: 1.25rem;
     font-weight: 600;
-    color: white;
+    color: var(--text-primary);
     margin: 0 0 0.5rem;
+    transition: color 0.3s ease;
 }
 
 .empty-state p {
-    color: #71717a;
+    color: var(--text-secondary);
     margin: 0;
+    transition: color 0.3s ease;
 }

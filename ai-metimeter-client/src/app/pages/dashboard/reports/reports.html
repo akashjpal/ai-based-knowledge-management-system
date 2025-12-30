@@ -61,14 +61,17 @@
         <div class="section-header">
             <h2>Recent Reports</h2>
             <div class="section-actions">
-                <button class="filter-btn active">All</button>
-                <button class="filter-btn">This Week</button>
-                <button class="filter-btn">This Month</button>
+                <button class="filter-btn" [class.active]="activeFilter === 'all'"
+                    (click)="setFilter('all')">All</button>
+                <button class="filter-btn" [class.active]="activeFilter === 'week'" (click)="setFilter('week')">This
+                    Week</button>
+                <button class="filter-btn" [class.active]="activeFilter === 'month'" (click)="setFilter('month')">This
+                    Month</button>
             </div>
         </div>
 
         <div class="reports-list">
-            <div class="report-item" *ngFor="let report of recentReports">
+            <div class="report-item" *ngFor="let report of filteredReports">
                 <div class="report-icon" [attr.data-subject]="getSubjectClass(report.subject)">
                     <mat-icon>{{ report.icon }}</mat-icon>
                 </div>

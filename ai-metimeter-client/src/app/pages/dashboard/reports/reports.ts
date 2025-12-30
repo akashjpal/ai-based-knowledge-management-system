@@ -33,6 +33,8 @@ interface ReportItem {
     styleUrl: './reports.scss'
 })
 export class Reports {
+    activeFilter: 'all' | 'week' | 'month' = 'all';
+
     stats = {
         totalAssessments: 24,
         totalParticipants: 156,
@@ -87,6 +89,25 @@ export class Reports {
             icon: 'science'
         }
     ];
+
+    get filteredReports(): ReportItem[] {
+        // In a real app, this would filter based on actual dates
+        // For demo purposes, we'll show different subsets based on filter
+        switch (this.activeFilter) {
+            case 'week':
+                // Show only first 3 (simulating this week's reports)
+                return this.recentReports.slice(0, 3);
+            case 'month':
+                // Show first 4 (simulating this month's reports)
+                return this.recentReports.slice(0, 4);
+            default:
+                return this.recentReports;
+        }
+    }
+
+    setFilter(filter: 'all' | 'week' | 'month'): void {
+        this.activeFilter = filter;
+    }
 
     getScoreClass(score: number): string {
         if (score >= 90) return 'excellent';
