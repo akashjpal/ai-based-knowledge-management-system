@@ -1,8 +1,9 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, inject } from '@angular/core';
 import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './components/layout/header/header';
 import { FooterComponent } from './components/layout/footer/footer';
+import { ThemeService } from './services/theme.service';
 import { filter } from 'rxjs/operators';
 
 @Component({
@@ -13,6 +14,9 @@ import { filter } from 'rxjs/operators';
   styleUrl: './app.scss'
 })
 export class App {
+  // Inject ThemeService to ensure it initializes on app startup
+  private themeService = inject(ThemeService);
+
   protected readonly title = signal('ai-quick-analysis');
   isLandingPage = signal(false);
 
@@ -29,7 +33,9 @@ export class App {
   }
 
   private checkRoute(url: string) {
-    // Hide header/footer on landing page (root path)
-    this.isLandingPage.set(url === '/' || url === '');
+    // Hide header/footer on landing page (root path) and dashboard pages (which have their own nav)
+    // Strip hash fragment to properly detect landing page with anchor navigation (e.g., /#testimonials)
+    const urlWithoutHash = url.split('#')[0];
+    this.isLandingPage.set(urlWithoutHash === '/' || urlWithoutHash === '' || url.startsWith('/dashboard'));
   }
 }
