@@ -121,20 +121,89 @@
     border-radius: 50%;
     animation: float-particle 15s ease-in-out infinite;
 
-    @for $i from 1 through 8 {
-        &.particle-#{$i} {
-            left: random(100) * 1%;
-            top: random(100) * 1%;
-            animation-delay: -#{$i * 2}s;
-            animation-duration: #{15 + random(10)}s;
-            opacity: #{0.3 + random() * 0.4};
-            width: #{3 + random(4)}px;
-            height: #{3 + random(4)}px;
+    // Pre-computed particle positions to avoid deprecated random() function
+    &.particle-1 {
+        left: 12%;
+        top: 23%;
+        animation-delay: -2s;
+        animation-duration: 18s;
+        opacity: 0.5;
+        width: 4px;
+        height: 4px;
+    }
 
-            @if $i % 2==0 {
-                background: rgba(56, 189, 248, 0.6);
-            }
-        }
+    &.particle-2 {
+        left: 45%;
+        top: 67%;
+        animation-delay: -4s;
+        animation-duration: 22s;
+        opacity: 0.6;
+        width: 5px;
+        height: 5px;
+        background: rgba(56, 189, 248, 0.6);
+    }
+
+    &.particle-3 {
+        left: 78%;
+        top: 34%;
+        animation-delay: -6s;
+        animation-duration: 19s;
+        opacity: 0.45;
+        width: 3px;
+        height: 3px;
+    }
+
+    &.particle-4 {
+        left: 23%;
+        top: 89%;
+        animation-delay: -8s;
+        animation-duration: 24s;
+        opacity: 0.55;
+        width: 6px;
+        height: 6px;
+        background: rgba(56, 189, 248, 0.6);
+    }
+
+    &.particle-5 {
+        left: 91%;
+        top: 12%;
+        animation-delay: -10s;
+        animation-duration: 17s;
+        opacity: 0.4;
+        width: 4px;
+        height: 4px;
+    }
+
+    &.particle-6 {
+        left: 56%;
+        top: 45%;
+        animation-delay: -12s;
+        animation-duration: 21s;
+        opacity: 0.65;
+        width: 5px;
+        height: 5px;
+        background: rgba(56, 189, 248, 0.6);
+    }
+
+    &.particle-7 {
+        left: 34%;
+        top: 56%;
+        animation-delay: -14s;
+        animation-duration: 20s;
+        opacity: 0.5;
+        width: 3px;
+        height: 3px;
+    }
+
+    &.particle-8 {
+        left: 67%;
+        top: 78%;
+        animation-delay: -16s;
+        animation-duration: 23s;
+        opacity: 0.55;
+        width: 6px;
+        height: 6px;
+        background: rgba(56, 189, 248, 0.6);
     }
 }
 
