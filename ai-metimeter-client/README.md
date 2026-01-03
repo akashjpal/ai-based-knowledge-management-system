@@ -51,37 +51,272 @@
 
 ## 🔌 Backend Requirements (API Specification)
 
-To make this frontend fully functional, the backend server must implement the following REST API endpoints:
+To make this frontend fully functional, the backend server must implement the following REST API endpoints. All responses should follow the standard wrapper format.
 
-### Authentication
-| Method | Endpoint | Body | Description |
-| :--- | :--- | :--- | :--- |
-| `POST` | `/api/auth/login` | `{email, password}` | authenticate user & return JWT |
-| `POST` | `/api/auth/signup` | `{name, email, password}` | register new user |
-| `POST` | `/api/auth/forgot-password` | `{email}` | initiate password reset flow |
+### Standard Response Models
 
-### Assessments (Teacher)
-| Method | Endpoint | Body | Description |
-| :--- | :--- | :--- | :--- |
-| `POST` | `/api/assessments/generate` | `FormData` (file/text, topic) | trigger AI to generate questions |
-| `GET` | `/api/assessments` | - | list all quizzes created by user |
-| `GET` | `/api/assessments/:id` | - | get full details of a specific quiz |
-| `DELETE`| `/api/assessments/:id` | - | delete a quiz |
+```typescript
+// Success Response
+interface ApiResponse<T> {
+  success: boolean;
+  data: T;
+  message?: string;
+}
 
-### Reports & Analytics
-| Method | Endpoint | Description |
-| :--- | :--- | :--- |
-| `GET` | `/api/assessments/:id/stats` | Get high-level stats (avg score, total participants) |
-| `GET` | `/api/assessments/:id/results` | Get list of student attempts (name, score, time) |
+// Error Response
+interface ApiError {
+  success: false;
+  error: {
+    code: string;
+    message: string;
+    details?: Record<string, string[]>;
+  };
+}
 
-### Student Quiz Flow
-| Method | Endpoint | Body | Description |
-| :--- | :--- | :--- | :--- |
-| `POST` | `/api/quiz/join` | `{code, studentName}` | validate code and join session |
-| `GET` | `/api/quiz/:id/questions` | - | fetch questions for the session |
-| `POST` | `/api/quiz/submit` | `{quizId, answers[]}` | submit answers and calculate score |
+// Paginated Response
+interface PaginatedResponse<T> {
+  success: boolean;
+  data: T[];
+  pagination: {
+    page: number;
+    limit: number;
+    totalItems: number;
+    totalPages: number;
+  };
+}
+```
 
 ---
+
+### Authentication
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `POST` | `/api/auth/login` | Authenticate user & return JWT |
+| `POST` | `/api/auth/signup` | Register new user |
+| `POST` | `/api/auth/forgot-password` | Initiate password reset |
+| `POST` | `/api/auth/reset-password` | Complete password reset |
+| `POST` | `/api/auth/refresh` | Refresh access token |
+
+<details>
+<summary><strong>Request/Response Models</strong></summary>
+
+```typescript
+// POST /api/auth/login
+interface LoginRequest {
+  email: string;
+  password: string;
+}
+
+// POST /api/auth/signup
+interface SignupRequest {
+  name: string;
+  email: string;
+  password: string;
+}
+
+// Auth Response (login/signup)
+interface AuthResponse {
+  user: {
+    id: string;
+    name: string;
+    email: string;
+    role: 'teacher' | 'student' | 'admin';
+    avatarUrl?: string;
+  };
+  accessToken: string;
+  refreshToken: string;
+  expiresIn: number;
+}
+
+// POST /api/auth/forgot-password
+interface ForgotPasswordRequest {
+  email: string;
+}
+
+// POST /api/auth/reset-password
+interface ResetPasswordRequest {
+  token: string;
+  newPassword: string;
+}
+```
+</details>
+
+---
+
+### Assessments (Teacher)
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `POST` | `/api/assessments/generate` | AI-generate quiz from content |
+| `GET` | `/api/assessments` | List user's assessments |
+| `GET` | `/api/assessments/:id` | Get full assessment details |
+| `PUT` | `/api/assessments/:id` | Update assessment |
+| `DELETE` | `/api/assessments/:id` | Delete assessment |
+| `POST` | `/api/assessments/:id/publish` | Publish & generate join code |
+
+<details>
+<summary><strong>Request/Response Models</strong></summary>
+
+```typescript
+// POST /api/assessments/generate (FormData)
+interface CreateAssessmentRequest {
+  title: string;
+  subject: string;
+  topic: string;
+  difficulty: 'easy' | 'medium' | 'hard' | 'expert';
+  questionsCount: number;
+  content?: string;      // Text content
+  file?: File;           // PDF upload (FormData)
+}
+
+// Assessment Summary (list view)
+interface AssessmentSummary {
+  id: string;
+  title: string;
+  subject: string;
+  questionsCount: number;
+  status: 'draft' | 'published' | 'archived';
+  code?: string;
+  participantsCount: number;
+  avgScore?: number;
+  createdAt: string;
+}
+
+// Full Assessment (detail view)
+interface Assessment {
+  id: string;
+  title: string;
+  subject: string;
+  topic?: string;
+  difficulty: 'easy' | 'medium' | 'hard' | 'expert';
+  questions: Question[];
+  questionsCount: number;
+  status: 'draft' | 'published' | 'archived';
+  code?: string;
+  timeLimit?: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+// Question
+interface Question {
+  id: string;
+  text: string;
+  options: { id: string; text: string; isCorrect?: boolean }[];
+  correctAnswerIndex: number;
+  explanation?: string;
+}
+```
+</details>
+
+---
+
+### Reports & Analytics
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `GET` | `/api/assessments/:id/stats` | Assessment statistics |
+| `GET` | `/api/assessments/:id/results` | List of student attempts |
+| `GET` | `/api/dashboard/stats` | Teacher dashboard summary |
+
+<details>
+<summary><strong>Response Models</strong></summary>
+
+```typescript
+// GET /api/assessments/:id/stats
+interface AssessmentStats {
+  assessmentId: string;
+  totalParticipants: number;
+  completedCount: number;
+  averageScore: number;
+  highestScore: number;
+  lowestScore: number;
+  averageTimeSeconds: number;
+  completionRate: number;
+}
+
+// GET /api/assessments/:id/results
+interface StudentResult {
+  id: string;
+  studentName: string;
+  score: number;
+  percentage: number;
+  correctAnswers: number;
+  totalQuestions: number;
+  timeTakenSeconds: number;
+  submittedAt: string;
+}
+
+// GET /api/dashboard/stats
+interface DashboardStats {
+  totalAssessments: number;
+  totalParticipants: number;
+  avgPerformance: number;
+  completionRate: number;
+}
+```
+</details>
+
+---
+
+### Student Quiz Flow
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `POST` | `/api/quiz/join` | Join quiz with 6-digit code |
+| `GET` | `/api/quiz/:sessionId/questions` | Fetch quiz questions |
+| `POST` | `/api/quiz/submit` | Submit answers |
+
+<details>
+<summary><strong>Request/Response Models</strong></summary>
+
+```typescript
+// POST /api/quiz/join
+interface JoinQuizRequest {
+  code: string;
+  studentName: string;
+  studentEmail?: string;
+}
+
+// Response
+interface QuizSession {
+  sessionId: string;
+  assessmentId: string;
+  assessmentTitle: string;
+  subject: string;
+  questionsCount: number;
+  timeLimit?: number;
+  startedAt: string;
+}
+
+// GET /api/quiz/:sessionId/questions
+interface StudentQuestion {
+  id: string;
+  text: string;
+  options: { id: string; text: string }[];
+}
+
+// POST /api/quiz/submit
+interface SubmitQuizRequest {
+  sessionId: string;
+  answers: { questionId: string; selectedOptionIndex: number }[];
+}
+
+// Response
+interface SubmitQuizResponse {
+  result: StudentResult;
+  correctAnswers: {
+    questionId: string;
+    correctOptionIndex: number;
+    isCorrect: boolean;
+  }[];
+}
+```
+</details>
+
+---
+
 
 ## 💻 Getting Started
 

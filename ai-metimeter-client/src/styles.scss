@@ -29,6 +29,7 @@ $ai-mentimeter-theme: mat.m2-define-light-theme((color: (primary: $ai-mentimeter
   --bg-dark: hsl(240, 10%, 4%);
   --bg-card: rgba(255, 255, 255, 0.03);
   --bg-card-hover: rgba(255, 255, 255, 0.06);
+  --dropdown-bg: #1e1e24;
 
   --text-primary: hsl(0, 0%, 100%);
   --text-secondary: hsl(240, 5%, 65%);
@@ -49,6 +50,58 @@ $ai-mentimeter-theme: mat.m2-define-light-theme((color: (primary: $ai-mentimeter
   // Shadows
   --shadow-glow-primary: 0 0 40px rgba(139, 92, 246, 0.3);
   --shadow-glow-accent: 0 0 40px rgba(56, 189, 248, 0.3);
+}
+
+// ============================================
+// Light Theme Variables
+// ============================================
+body.light-theme {
+  --bg-dark: #f8fafc;
+  --bg-card: rgba(0, 0, 0, 0.02);
+  --bg-card-hover: rgba(0, 0, 0, 0.04);
+  --dropdown-bg: #ffffff;
+
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
+  --text-muted: #6b7280;
+
+  --border-subtle: rgba(0, 0, 0, 0.1);
+  --border-light: rgba(0, 0, 0, 0.15);
+
+  --shadow-glow-primary: 0 4px 20px rgba(139, 92, 246, 0.2);
+  --shadow-glow-accent: 0 4px 20px rgba(56, 189, 248, 0.2);
+
+  // Light theme specific colors
+  --sidenav-bg: #ffffff;
+  --sidenav-border: rgba(0, 0, 0, 0.1);
+  --topbar-bg: rgba(255, 255, 255, 0.98);
+  --input-bg: #f1f5f9;
+  --card-bg: #ffffff;
+
+  // Additional light theme contrasts
+  --icon-color: #374151;
+  --icon-active: #7c3aed;
+  --stepper-bg: #e5e7eb;
+  --stepper-text: #374151;
+  --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --header-gradient: linear-gradient(135deg, #7c3aed 0%, #6366f1 100%);
+}
+
+// Dark theme (default)
+body.dark-theme {
+  --sidenav-bg: linear-gradient(180deg, #0f0f12 0%, #09090b 100%);
+  --sidenav-border: rgba(255, 255, 255, 0.06);
+  --topbar-bg: rgba(15, 15, 18, 0.95);
+  --input-bg: rgba(255, 255, 255, 0.03);
+  --card-bg: rgba(255, 255, 255, 0.02);
+
+  // Dark theme specific
+  --icon-color: #a1a1aa;
+  --icon-active: #8b5cf6;
+  --stepper-bg: rgba(255, 255, 255, 0.05);
+  --stepper-text: #ffffff;
+  --card-shadow: none;
+  --header-gradient: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
 }
 
 // ============================================
@@ -76,6 +129,7 @@ body {
   color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 a {
@@ -245,5 +299,30 @@ a {
 
   &:hover {
     background: rgba(255, 255, 255, 0.2);
+  }
+}
+
+// ============================================
+// Material Overrides
+// ============================================
+.mat-mdc-select-panel {
+  background: var(--dropdown-bg) !important;
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px !important;
+  box-shadow: var(--shadow-glow-primary) !important;
+
+  .mat-mdc-option {
+    color: var(--text-secondary);
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: var(--bg-card-hover) !important;
+      color: var(--text-primary);
+    }
+
+    &.mdc-list-item--selected {
+      background: rgba(139, 92, 246, 0.15) !important;
+      color: var(--text-primary);
+    }
   }
 }

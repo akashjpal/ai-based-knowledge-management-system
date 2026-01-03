@@ -1,27 +1,47 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatTabsModule } from '@angular/material/tabs';
+import { ThemeService } from '../../../services/theme.service';
+
+interface SettingsSection {
+    id: string;
+    label: string;
+    icon: string;
+}
 
 @Component({
     selector: 'app-settings',
     standalone: true,
     imports: [
         CommonModule,
-        MatCardModule,
         MatIconModule,
-        MatButtonModule,
-        MatInputModule,
-        MatFormFieldModule,
-        MatSlideToggleModule,
-        MatTabsModule
+        MatSlideToggleModule
     ],
     templateUrl: './settings.html',
     styleUrls: ['./settings.scss']
 })
-export class Settings { }
+export class Settings {
+    private themeService = inject(ThemeService);
+
+    activeSection = 'profile';
+
+    settingsSections: SettingsSection[] = [
+        { id: 'profile', label: 'Profile', icon: 'person' },
+        { id: 'preferences', label: 'Preferences', icon: 'tune' },
+        { id: 'notifications', label: 'Notifications', icon: 'notifications' },
+        { id: 'security', label: 'Security', icon: 'shield' }
+    ];
+
+    get isDarkMode(): boolean {
+        return this.themeService.isDarkMode();
+    }
+
+    setActiveSection(sectionId: string): void {
+        this.activeSection = sectionId;
+    }
+
+    onThemeToggle(checked: boolean): void {
+        this.themeService.setTheme(checked ? 'dark' : 'light');
+    }
+}
